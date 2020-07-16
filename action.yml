@@ -7,3 +7,4 @@ inputs:
     description: 'The name of the artifact to deploy'
 runs:
   using: 'node12'
+  main: 'index.js'
