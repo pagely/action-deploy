@@ -5,10 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "@actions/core": "^1.2.4",
-    "@actions/github": "^4.0.0",
     "@actions/http-client": "^1.0.8",
-    "@octokit/auth-action": "^1.2.2",
-    "@octokit/rest": "^18.0.1"
+    "tar": "^6.0.2"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
