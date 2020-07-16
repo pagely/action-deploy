@@ -26,6 +26,5 @@ jobs:
         path: test-assets
     - uses: ./
       with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         deploy-url: ${{ secrets.TEST_DEPLOY_URL }}
-        artifact: "test"
+        path: "test-assets/test.html"
