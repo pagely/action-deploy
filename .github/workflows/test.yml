@@ -10,7 +10,8 @@ jobs:
   unit:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
+    - run: npm ci
     - run: npm test
 
   test:
@@ -19,7 +20,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
     - name: Create test artifact
-      uses: actions/actions/upload-artifact@v2
+      uses: actions/upload-artifact@v2
       with:
         name: test
         path: test-assets
