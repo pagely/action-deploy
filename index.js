@@ -6,9 +6,8 @@
 
     try {
 
-        const auth = createActionAuth();
         const octokit = new Octokit({
-            auth
+            authStrategy: createActionAuth
         });
 
         //const deployUrl = core.getInput('deploy-url');
