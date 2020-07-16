@@ -22,6 +22,9 @@
             repo: repo,
             run_id: run_id,
         });
+
+        await new Promise(resolve => setTimeout(resolve, 5000))
+
         const {data: artifacts} = await octokit.actions.listWorkflowRunArtifacts({
             owner: owner,
             repo: repo,
