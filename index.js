@@ -13,7 +13,7 @@
         const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
         const run_id = process.env.GITHUB_RUN_ID;
 
-        const {data: artifacts} = await octokit.listWorkflowRunArtifacts({
+        const {data: artifacts} = await octokit.actions.listWorkflowRunArtifacts({
             owner: owner,
             repo: repo,
             run_id: run_id,
