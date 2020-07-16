@@ -24,7 +24,7 @@ jobs:
         name: test
         path: test-assets
     - uses: ./
-    with:
-      deploy-url: ${{ secrets.TEST_DEPLOY_URL }}
-      artifact: "test"
+      with:
+        deploy-url: ${{ secrets.TEST_DEPLOY_URL }}
+        artifact: "test"
 
