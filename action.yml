@@ -5,6 +5,8 @@ inputs:
     description: 'Deploy url, create an Artifact integration in Atomic to get this'
   artifact:
     description: 'The name of the artifact to deploy'
+  GITHUB_TOKEN:
+    description: 'Github token to use to access artifacts, ${{ secrets.GITHUB_TOKEN }}, in most cases'
 runs:
   using: 'node12'
   main: 'index.js'
