@@ -1,0 +1,32 @@
+{
+  "name": "action-deploy",
+  "description": "Github action for deploying to Pagely Apps",
+  "version": "0.0.1",
+  "main": "index.js",
+  "dependencies": {
+    "@actions/core": "^1.2.4",
+    "@actions/github": "^4.0.0",
+    "@actions/http-client": "^1.0.8"
+  },
+  "devDependencies": {
+    "eslint": "^6.3.0"
+  },
+  "scripts": {
+    "test": "eslint index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pagely/action-deploy.git"
+  },
+  "keywords": [
+    "GitHub",
+    "Actions",
+    "Pagely"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pagely/action-deploy/issues"
+  },
+  "homepage": "https://github.com/pagely/action-deploy#readme"
+}

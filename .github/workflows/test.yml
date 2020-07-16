@@ -1,0 +1,30 @@
+name: "tests"
+on:
+  pull_request:
+    push:
+      branches:
+        - master
+        - 'releases/*'
+
+  jobs:
+    unit:
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v1
+      - run: npm test
+
+    test:
+      runs-on: ubuntu-latest
+      steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+      - name: Create test artifact
+        uses: actions/actions/upload-artifact@v2
+        with:
+          name: test
+          path: test-assets
+      - uses: ./
+      with:
+        deploy-url: ${{ secrets.TEST_DEPLOY_URL }}
+        artifact: "test"
+
