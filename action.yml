@@ -1,0 +1,9 @@
+name: 'Pagely Deploy'
+description: 'Deploy WordPress apps to your Pagely VPS'
+inputs:
+  deploy-url:
+    description: 'Deploy url, create an Artifact integration in Atomic to get this'
+  artifact:
+    description: 'The name of the artifact to deploy'
+runs:
+  using: 'node12'

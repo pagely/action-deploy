@@ -7,8 +7,8 @@
     try {
 
         //const deployUrl = core.getInput('deploy-url');
-        const artifactName = core.getInput('artifact-name');
-        console.log(`artifactName: ${artifactName}`)
+        const artifact = core.getInput('artifact');
+        console.log(`artifact: ${artifact}`)
 
         const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
         const run_id = process.env.GITHUB_RUN_ID;
