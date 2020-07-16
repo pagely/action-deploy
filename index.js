@@ -1,10 +1,15 @@
 (async () => {
     const core = require('@actions/core');
     const {Octokit} = require('@octokit/rest');
-    const octokit = new Octokit();
+    const {createActionAuth} = require("@octokit/auth-action");
     //const http = require('@actions/http-client');
 
     try {
+
+        const auth = createActionAuth();
+        const octokit = new Octokit({
+            auth
+        });
 
         //const deployUrl = core.getInput('deploy-url');
         const artifact = core.getInput('artifact');
