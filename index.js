@@ -1,37 +1,24 @@
 (async () => {
     const core = require('@actions/core');
-    const {Octokit} = require('@octokit/rest');
-    const {createActionAuth} = require("@octokit/auth-action");
-    //const http = require('@actions/http-client');
+    const httpm = require('@actions/http-client');
+    const fs = require("fs");
 
     try {
 
-        const octokit = new Octokit({
-            authStrategy: createActionAuth
-        });
+        const deployUrl = core.getInput('deploy-url');
+        const path = core.getInput('path');
+        console.log(`path: ${path}`)
 
-        //const deployUrl = core.getInput('deploy-url');
-        const artifact = core.getInput('artifact');
-        console.log(`artifact: ${artifact}`)
+        // will need to create a tar hopefully (or zip) here
 
-        const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
-        const run_id = process.env.GITHUB_RUN_ID;
+        const stream = fs.createReadStream(path)
 
-        console.log({
-            owner: owner,
-            repo: repo,
-            run_id: run_id,
-        });
+        const http = new httpm.HttpClient();
+        const res = await http.sendStream('PUT', deployUrl, stream)
+        if (res.message.statusCode < 200 || res.message.statusCode > 299) {
+            throw new Error("Non 2xx status uploading files got: "+res.message.statusCode)
+        }
 
-        await new Promise(resolve => setTimeout(resolve, 5000))
-
-        const {data: artifacts} = await octokit.actions.listWorkflowRunArtifacts({
-            owner: owner,
-            repo: repo,
-            run_id: run_id,
-        });
-        const debug = JSON.stringify(artifacts, undefined, 2);
-        console.log(`run artifacts: ${debug}`);
     } catch (error) {
         console.log(error)
         core.setFailed(error.message);
