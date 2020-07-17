@@ -49,7 +49,7 @@
         if (res.message.statusCode < 200 || res.message.statusCode > 299) {
             throw new Error("Non 2xx status uploading files got: "+res.message.statusCode)
         }
-        const body await res.readyBody()
+        const body = await res.readyBody()
         console.log(body)
 
     } catch (error) {
