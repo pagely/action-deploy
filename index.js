@@ -1,26 +1,38 @@
 (async () => {
     const core = require('@actions/core');
     const httpm = require('@actions/http-client');
+    const httpm = require('@actions/glob');
     const fs = require("fs");
+    const tar = require("tar");
 
     try {
 
         const deployUrl = core.getInput('deploy-url');
-        const path = core.getInput('path');
-        console.log(`path: ${path}`)
+        const patterns = core.getInput('files');
+        console.log(`patterns: ${patterns}`)
+        const globber = await glob.create(pattern.join('\n'))
+        const files = await globber.glob()
+        console.log(`files: ${files}`)
 
-        // will need to create a tar hopefully (or zip) here
+        tar.c(
+            {
+                "gzip": true
+            },
+            files
+        ).pipe(fs.createWriteStream("app.tar.gz"))
 
-        const stream = fs.createReadStream(path)
+
+        const stream = fs.createReadStream("app.tar.gz")
 
         const http = new httpm.HttpClient();
-        const res = await http.sendStream('PUT', deployUrl, stream)
+        const res = await http.sendStream('PUT', deployUrl, stream);
         if (res.message.statusCode < 200 || res.message.statusCode > 299) {
             throw new Error("Non 2xx status uploading files got: "+res.message.statusCode)
         }
 
     } catch (error) {
-        console.log(error)
+        console.log(error);
         core.setFailed(error.message);
     }
 })();
+

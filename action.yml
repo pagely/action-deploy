@@ -3,8 +3,10 @@ description: 'Deploy WordPress apps to your Pagely VPS'
 inputs:
   deploy-url:
     description: 'Deploy url, create an Artifact integration in Atomic to get this'
-  path:
-    description: 'A file, directory or wildcard pattern that describes what to upload'
+    required: true
+  files:
+    description: 'A file, directory or wildcard pattern that describes what to upload see https://github.com/actions/toolkit/tree/main/packages/glob'
+    required: true
 runs:
   using: 'node12'
   main: 'index.js'
