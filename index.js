@@ -12,6 +12,7 @@
         const dest = core.getInput('dest');
         console.log(`patterns: ${patterns}`)
 
+        deployUrl += "&tail=1"
         if (dest != "") {
             deployUrl += "&dest="+encodeURIComponent(dest)
             console.log(`Setting override destination to ${dest}`)
