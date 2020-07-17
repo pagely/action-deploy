@@ -49,7 +49,8 @@
         if (res.message.statusCode < 200 || res.message.statusCode > 299) {
             throw new Error("Non 2xx status uploading files got: "+res.message.statusCode)
         }
-        console.log(`Deploy job successfully started at Pagely`)
+        const body await res.readyBody()
+        console.log(body)
 
     } catch (error) {
         console.log(error);
