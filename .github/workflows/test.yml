@@ -19,11 +19,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    - name: Create test artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: test
-        path: test-assets
     - uses: ./
       with:
         deploy-url: ${{ secrets.TEST_DEPLOY_URL }}
