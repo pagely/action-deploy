@@ -12,7 +12,7 @@
         console.log(`patterns: ${patterns}`)
         const globber = await glob.create(patterns)
         const files = []
-        const cwd = process.cwd()
+        const cwd = process.cwd()."/"
         for await (const file of globber.globGenerator()) {
             if (file.startsWith(cwd)) {
                 files.push(file.replace(cwd, ''))
