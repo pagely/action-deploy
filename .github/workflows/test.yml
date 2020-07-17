@@ -28,3 +28,4 @@ jobs:
       with:
         deploy-url: ${{ secrets.TEST_DEPLOY_URL }}
         files: "test-assets/**"
+        dest: /htdocs

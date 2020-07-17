@@ -9,7 +9,14 @@
 
         const deployUrl = core.getInput('deploy-url');
         const patterns = core.getInput('files');
+        const dest = core.getInput('dest');
         console.log(`patterns: ${patterns}`)
+
+        if (dest != "") {
+            deployUrl += "&dest="+encodeURIComponent(dest)
+            console.log(`Setting override destination to ${dest}`)
+        }
+
         const globber = await glob.create(patterns)
         const files = []
         const cwd = process.cwd()+"/"
