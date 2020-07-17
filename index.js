@@ -15,7 +15,7 @@
         const cwd = process.cwd()
         for await (const file of globber.globGenerator()) {
             if (file.startsWith(cwd)) {
-                files.push(file.replace(cwd, file))
+                files.push(file.replace(cwd, ''))
             }
 
         }
