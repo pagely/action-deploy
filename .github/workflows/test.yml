@@ -27,4 +27,4 @@ jobs:
     - uses: ./
       with:
         deploy-url: ${{ secrets.TEST_DEPLOY_URL }}
-        path: "test-assets/test.html"
+        files: "test-assets/**"
