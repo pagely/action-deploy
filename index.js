@@ -1,7 +1,7 @@
 (async () => {
     const core = require('@actions/core');
     const httpm = require('@actions/http-client');
-    const httpm = require('@actions/glob');
+    const glob = require('@actions/glob');
     const fs = require("fs");
     const tar = require("tar");
 
@@ -10,7 +10,7 @@
         const deployUrl = core.getInput('deploy-url');
         const patterns = core.getInput('files');
         console.log(`patterns: ${patterns}`)
-        const globber = await glob.create(pattern.join('\n'))
+        const globber = await glob.create(patterns)
         const files = await globber.glob()
         console.log(`files: ${files}`)
 
