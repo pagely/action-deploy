@@ -8,7 +8,7 @@ inputs:
     description: 'A file, directory or wildcard pattern that describes what to upload see https://github.com/actions/toolkit/tree/main/packages/glob'
     required: true
   dest:
-    description: 'Set the subdirectory to deploy to, if not set the value set in the integration will be used examples: /htdocs, /htdocs/wp-content/plugins/my-plugin'
+    description: 'Set the subdirectory to deploy to, if not set the value set in the integration will be used examples: /httpdocs, /httpdocs/wp-content/plugins/my-plugin'
 runs:
   using: 'node12'
   main: 'index.js'

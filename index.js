@@ -48,10 +48,10 @@
         if (res.message.statusCode < 200 || res.message.statusCode > 299) {
             throw new Error("Non 2xx status uploading files got: "+res.message.statusCode)
         }
+        console.log(`Deploy job successfully started at Pagely`)
 
     } catch (error) {
         console.log(error);
         core.setFailed(error.message);
     }
 })();
-
