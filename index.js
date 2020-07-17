@@ -21,7 +21,7 @@
         }
         console.log(`files: ${files}`)
 
-        tar.c(
+        await tar.c(
             {
                 "file": "app.tar.gz",
                 "gzip": true,
