@@ -11,12 +11,20 @@
         const patterns = core.getInput('files');
         console.log(`patterns: ${patterns}`)
         const globber = await glob.create(patterns)
-        const files = await globber.glob()
+        const files = []
+        const cwd = process.cwd()
+        for await (const file of globber.globGenerator()) {
+            if (file.startsWith(cwd)) {
+                files.push(file.replace(cwd, file))
+            }
+
+        }
         console.log(`files: ${files}`)
 
         tar.c(
             {
-                "gzip": true
+                "gzip": true,
+                "portable": true,
             },
             files
         ).pipe(fs.createWriteStream("app.tar.gz"))
