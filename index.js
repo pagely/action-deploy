@@ -29,6 +29,8 @@
             files
         ).pipe(fs.createWriteStream("app.tar.gz"))
 
+        const stats = fs.statSync("app.tar.gz")
+        console.log(stats)
 
         const stream = fs.createReadStream("app.tar.gz")
 
