@@ -7,7 +7,7 @@
 
     try {
 
-        const deployUrl = core.getInput('deploy-url');
+        var deployUrl = core.getInput('deploy-url');
         const patterns = core.getInput('files');
         const dest = core.getInput('dest');
         console.log(`patterns: ${patterns}`)
@@ -38,7 +38,8 @@
         )
 
         const stats = fs.statSync("app.tar.gz")
-        console.log(stats)
+        const kib = stats.size/1024;
+        console.log(`Created a ${kib}KiB file to deploy`)
 
         const stream = fs.createReadStream("app.tar.gz")
 
