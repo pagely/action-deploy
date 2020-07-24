@@ -7,16 +7,11 @@
 
     try {
 
-        var deployUrl = core.getInput('deploy-url');
         const patterns = core.getInput('files');
         const dest = core.getInput('dest');
-        console.log(`patterns: ${patterns}`)
-
-        deployUrl += "&tail=1"
-        if (dest != "") {
-            deployUrl += "&dest="+encodeURIComponent(dest)
-            console.log(`Setting override destination to ${dest}`)
-        }
+        const integrationId = core.getInput('integrationId');
+        const appId = core.getInput('appId');
+        const token = core.getInput('token');
 
         const globber = await glob.create(patterns)
         const files = []
@@ -27,7 +22,6 @@
             }
 
         }
-        console.log(`files: ${files}`)
 
         await tar.c(
             {
@@ -44,8 +38,19 @@
 
         const stream = fs.createReadStream("app.tar.gz")
 
+        const headers = ["X-Token": token]
         const http = new httpm.HttpClient();
-        const res = await http.sendStream('PUT', deployUrl, stream);
+        const r1 = await http.get(
+            "https://mgmt.pagely.com/api/apps/integration/"+encodeURIComponent(integrationId)+"/endpoint?appId="+encodeURIComponent(appId),
+            headers
+        )
+        var deployUrl = r1.body+"&tail=1"
+        if (dest != "") {
+            deployUrl += "&dest="+encodeURIComponent(dest)
+            console.log(`Setting override destination to ${dest}`)
+        }
+
+        const res = await http.sendStream('PUT', deployUrl, stream, headers);
         if (res.message.statusCode < 200 || res.message.statusCode > 299) {
             throw new Error("Non 2xx status uploading files got: "+res.message.statusCode)
         }

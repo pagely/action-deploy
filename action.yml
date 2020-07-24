@@ -1,14 +1,20 @@
 name: 'Pagely Deploy'
-description: 'Deploy WordPress apps to your Pagely VPS'
+description: 'Deploy apps to your Pagely VPS'
 inputs:
-  deploy-url:
-    description: 'Deploy url, create an Artifact integration in Atomic to get this'
+  token:
+    description: 'Authentication token, Create an CI Integration in Atomic to get this'
+    required: true
+  integrationId:
+    description: 'Unique id for the integration'
+    required: true
+  appId:
+    description: 'Id of the app you want to deploy to, avilable in Atomic'
     required: true
   files:
     description: 'A file, directory or wildcard pattern that describes what to upload see https://github.com/actions/toolkit/tree/main/packages/glob'
     required: true
   dest:
-    description: 'Set the subdirectory to deploy to, if not set the value set in the integration will be used examples: /httpdocs, /httpdocs/wp-content/plugins/my-plugin'
+    description: 'Set the subdirectory to deploy to examples: /httpdocs, /httpdocs/wp-content/plugins/my-plugin, /app'
 runs:
   using: 'node12'
   main: 'index.js'
