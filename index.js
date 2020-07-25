@@ -41,7 +41,7 @@
         const requestHeaders = {"X-Token": token}
         const http = new httpm.HttpClient();
         const r1 = await http.get(
-            "https://mgmt.pagely.com/api/apps/integration/"+encodeURIComponent(integrationId)+"/endpoint?appId="+encodeURIComponent(appId),
+            "https://mgmt.pagely.com/api/apps/integration/"+encodeURIComponent(integrationId)+"/endpoint?app="+encodeURIComponent(appId),
             requestHeaders
         )
         if (r1.message.statusCode < 200 || r1.message.statusCode > 299) {
