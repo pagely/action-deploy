@@ -45,7 +45,7 @@
             requestHeaders
         )
         if (r1.message.statusCode < 200 || r1.message.statusCode > 299) {
-            throw new Error("Non 2xx status lookup up upload url: "+res.message.statusCode)
+            throw new Error("Non 2xx status lookup up upload url: "+r1.message.statusCode)
         }
 
         var deployUrl = r1.body+"&tail=1"
