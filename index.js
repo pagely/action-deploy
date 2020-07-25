@@ -48,7 +48,7 @@
             throw new Error("Non 2xx status lookup up upload url: "+r1.message.statusCode)
         }
 
-        let body = await r1.readBody()
+        const body = await r1.readBody()
         var deployUrl = body+"&tail=1"
         if (dest != "") {
             deployUrl += "&dest="+encodeURIComponent(dest)
@@ -59,8 +59,8 @@
         if (res.message.statusCode < 200 || res.message.statusCode > 299) {
             throw new Error("Non 2xx status uploading files got: "+res.message.statusCode)
         }
-        const body = await res.readBody()
-        console.log(body)
+        const body2 = await res.readBody()
+        console.log(body2)
 
     } catch (error) {
         console.log(error);
