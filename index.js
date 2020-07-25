@@ -57,6 +57,7 @@
 
         const res = await http.sendStream('PUT', deployUrl, stream, requestHeaders);
         const body2 = await res.readBody()
+        console.log(deployUrl)
         if (res.message.statusCode < 200 || res.message.statusCode > 299) {
             throw new Error("Non 2xx status uploading files got: "+res.message.statusCode+"\n"+body2)
         }
