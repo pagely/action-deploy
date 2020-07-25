@@ -49,7 +49,7 @@
             throw new Error("Non 2xx status lookup up upload url: "+r1.message.statusCode+"\n"+body)
         }
 
-        var deployUrl = body+"&tail=1&app="+encodeURIComponent(appId)
+        var deployUrl = body+"&tail=1&app="+encodeURIComponent(appId)+"&id="+encodeURIComponent(integrationId)
         if (dest != "") {
             deployUrl += "&dest="+encodeURIComponent(dest)
             console.log(`Setting override destination to ${dest}`)
