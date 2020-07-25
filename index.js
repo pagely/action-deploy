@@ -49,7 +49,7 @@
         }
 
         const body = await r1.readBody()
-        var deployUrl = body+"&tail=1"
+        var deployUrl = body+"&tail=1&appId="+encodeURIComponent(appId)
         if (dest != "") {
             deployUrl += "&dest="+encodeURIComponent(dest)
             console.log(`Setting override destination to ${dest}`)
