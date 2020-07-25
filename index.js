@@ -38,11 +38,11 @@
 
         const stream = fs.createReadStream("app.tar.gz")
 
-        const headers = ["X-Token": token]
+        const requestHeaders = {"X-Token": token}
         const http = new httpm.HttpClient();
         const r1 = await http.get(
             "https://mgmt.pagely.com/api/apps/integration/"+encodeURIComponent(integrationId)+"/endpoint?appId="+encodeURIComponent(appId),
-            headers
+            requestHeaders
         )
         if (r1.message.statusCode < 200 || r1.message.statusCode > 299) {
             throw new Error("Non 2xx status lookup up upload url: "+res.message.statusCode)
@@ -54,7 +54,7 @@
             console.log(`Setting override destination to ${dest}`)
         }
 
-        const res = await http.sendStream('PUT', deployUrl, stream, headers);
+        const res = await http.sendStream('PUT', deployUrl, stream, requestHeaders);
         if (res.message.statusCode < 200 || res.message.statusCode > 299) {
             throw new Error("Non 2xx status uploading files got: "+res.message.statusCode)
         }
