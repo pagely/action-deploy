@@ -41,15 +41,15 @@
         const requestHeaders = {"X-Token": token}
         const http = new httpm.HttpClient();
         const r1 = await http.get(
-            "https://mgmt.pagely.com/api/apps/integration/"+encodeURIComponent(integrationId)+"/endpoint?app="+encodeURIComponent(appId),
+            "https://mgmt.pagely.com/api/apps/integration/"+encodeURIComponent(integrationId)+"/endpoint?appId="+encodeURIComponent(appId),
             requestHeaders
         )
+        const body = await r1.readBody()
         if (r1.message.statusCode < 200 || r1.message.statusCode > 299) {
-            throw new Error("Non 2xx status lookup up upload url: "+r1.message.statusCode)
+            throw new Error("Non 2xx status lookup up upload url: "+r1.message.statusCode+"\n"+body)
         }
 
-        const body = await r1.readBody()
-        var deployUrl = body+"&tail=1&appId="+encodeURIComponent(appId)
+        var deployUrl = body+"&tail=1&app="+encodeURIComponent(appId)
         if (dest != "") {
             deployUrl += "&dest="+encodeURIComponent(dest)
             console.log(`Setting override destination to ${dest}`)
