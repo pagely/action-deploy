@@ -38,24 +38,30 @@
 
         const stream = fs.createReadStream("app.tar.gz")
 
-        const headers = ["X-Token": token]
+        const requestHeaders = {"X-Token": token}
         const http = new httpm.HttpClient();
         const r1 = await http.get(
             "https://mgmt.pagely.com/api/apps/integration/"+encodeURIComponent(integrationId)+"/endpoint?appId="+encodeURIComponent(appId),
-            headers
+            requestHeaders
         )
-        var deployUrl = r1.body+"&tail=1"
+        const body = await r1.readBody()
+        if (r1.message.statusCode < 200 || r1.message.statusCode > 299) {
+            throw new Error("Non 2xx status lookup up upload url: "+r1.message.statusCode+"\n"+body)
+        }
+
+        var deployUrl = body+"&tail=1&app="+encodeURIComponent(appId)+"&id="+encodeURIComponent(integrationId)
         if (dest != "") {
             deployUrl += "&dest="+encodeURIComponent(dest)
             console.log(`Setting override destination to ${dest}`)
         }
 
-        const res = await http.sendStream('PUT', deployUrl, stream, headers);
+        const res = await http.sendStream('PUT', deployUrl, stream, requestHeaders);
+        const body2 = await res.readBody()
+        console.log(deployUrl)
         if (res.message.statusCode < 200 || res.message.statusCode > 299) {
-            throw new Error("Non 2xx status uploading files got: "+res.message.statusCode)
+            throw new Error("Non 2xx status uploading files got: "+res.message.statusCode+"\n"+body2)
         }
-        const body = await res.readBody()
-        console.log(body)
+        console.log(body2)
 
     } catch (error) {
         console.log(error);
