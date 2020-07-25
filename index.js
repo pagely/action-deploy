@@ -48,7 +48,8 @@
             throw new Error("Non 2xx status lookup up upload url: "+r1.message.statusCode)
         }
 
-        var deployUrl = r1.body+"&tail=1"
+        let body = await r1.readBody()
+        var deployUrl = body+"&tail=1"
         if (dest != "") {
             deployUrl += "&dest="+encodeURIComponent(dest)
             console.log(`Setting override destination to ${dest}`)
