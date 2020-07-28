@@ -14,7 +14,7 @@ inputs:
     description: 'Id of the app you want to deploy to, available in Atomic'
     required: true
   PAGELY_WORKING_DIR:
-    description: 'The directory that you want deployed, based on the build files' path. i.e. $GITHUB_WORKSPACE'
+    description: 'The directory that you want deployed, based on the build files path. i.e. $GITHUB_WORKSPACE'
     default: "$pwd"
     required: false
 runs:
