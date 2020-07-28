@@ -5,30 +5,31 @@ Github action for deploying to Pagely Apps
 
 | Name            | Requirement | Description |
 | --------------- | ----------- | ----------  |
-| `token`         | _required_  | Authentication token, Create an CI Integration in Atomic to get this
-| `integrationId` | _required_ | Unique id for the integration
-| `appId`         | _required_ | Id of the app you want to deploy to, avilable in Atomic
-| `files`      | _required_  | A file, directory or wildcard pattern that describes what to upload see details in the [glob action](https://github.com/actions/toolkit/tree/main/packages/glob) |
-| `dest`       | _optional_  | Set the subdirectory to deploy to, if not set the value set in the integration will be used examples: /httpdocs, /httpdocs/wp-content/plugins/my-plugin |
+| `PAGELY_INTEGRATION_SECRET` | _required_ | Authentication token, Create an CI Integration in Atomic to get this
+| `PAGELY_INTEGRATION_ID`     | _required_ | Unique id for the integration found in Atomic
+| `PAGELY_APP_ID`             | _required_ | Id of the app you want to deploy to, avilable in Atomic
+| `PAGELY_DEPLOY_DEST`        | _required_ | Set the subdirectory to deploy to. examples: /httpdocs, /httpdocs/wp-content/plugins/my-plugin |
+| `PAGELY_WORKING_DIR`        | _optional_ | The directory that you want deployed, based on the build files' path. example: "$GITHUB_WORKSPACE"  |
 
 ## Outputs
 
 ## Example usage
 
 ```
-on: ["push"]
-
-name: Deploy my app
-
+on:
+  push:
+jobs:
   deploy:
-    name: Deploy
-    runs-on: ubuntu-latest
+    name: Deploy to My Pagely App
+    runs-on: ubuntu-20.04
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    - uses: pagely/action-deploy@master
-      with:
-        deploy-url: ${{ secrets.TEST_DEPLOY_URL }}
-        files: "test-assets/**"
-        dest: /httpdocs
+      - name: Run deploy
+        uses: pagely/action-deploy@master
+        with:
+          PAGELY_DEPLOY_DEST: "/httpdocs/wp-content/plugins/my-plugin"
+          PAGELY_INTEGRATION_SECRET: ${{secrets.PAGELY_INTEGRATION_SECRET}}
+          PAGELY_INTEGRATION_ID: ${{secrets.PAGELY_INTEGRATION_ID}}
+          PAGELY_APP_ID: ${{secrets.PAGELY_APP_ID}}
+          PAGELY_WORKING_DIR: "$GITHUB_WORKSPACE" # use the files starting at the repository root
+
 ```
