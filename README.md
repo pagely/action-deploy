@@ -9,7 +9,7 @@ Github action for deploying to Pagely Apps
 | `PAGELY_INTEGRATION_ID`     | _required_ | Unique id for the integration found in Atomic
 | `PAGELY_APP_ID`             | _required_ | Id of the app you want to deploy to, avilable in Atomic
 | `PAGELY_DEPLOY_DEST`        | _required_ | Set the subdirectory to deploy to. examples: /httpdocs, /httpdocs/wp-content/plugins/my-plugin |
-| `PAGELY_WORKING_DIR`        | _optional_ | The directory that you want deployed, based on the build files' path. example: "$GITHUB_WORKSPACE"  |
+| `PAGELY_WORKING_DIR`        | _optional_ | The directory that you want deployed, based on the build files' path. example: "${{github.workspace}}"  |
 
 ## Outputs
 
@@ -23,6 +23,8 @@ jobs:
     name: Deploy to My Pagely App
     runs-on: ubuntu-20.04
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
       - name: Run deploy
         uses: pagely/action-deploy@master
         with:
