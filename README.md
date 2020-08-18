@@ -26,7 +26,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
       - name: Run deploy
-        uses: pagely/action-deploy@master
+        uses: pagely/action-deploy@v1
         with:
           PAGELY_DEPLOY_DEST: "/httpdocs/wp-content/plugins/my-plugin"
           PAGELY_INTEGRATION_SECRET: ${{secrets.PAGELY_INTEGRATION_SECRET}}
