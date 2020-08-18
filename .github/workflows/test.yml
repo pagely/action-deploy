@@ -16,7 +16,7 @@ jobs:
         PAGELY_INTEGRATION_SECRET: ${{secrets.TEST_TOKEN}}
         PAGELY_INTEGRATION_ID: ${{secrets.TEST_INTEGRATION_ID}}
         PAGELY_APP_ID: ${{secrets.TEST_APP_ID}}
-        PAGELY_WORKING_DIR: "${{GITHUB_WORKSPACE}}/test-assets"
+        PAGELY_WORKING_DIR: "$GITHUB_WORKSPACE/test-assets"
     - name: Create a status check
       uses: LouisBrunner/checks-action@v0.1.0
       if: always()
