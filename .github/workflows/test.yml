@@ -24,7 +24,3 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         name: Integration Test
         conclusion: ${{job}}
-        output:
-          summary: test
-          text_description: desc
-
