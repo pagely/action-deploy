@@ -1,19 +1,9 @@
 name: "tests"
 on:
   pull_request:
-    push:
-      branches:
-        - master
-        - 'releases/*'
+    types: [push]
 
 jobs:
-  unit:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - run: npm ci
-    - run: npm test
-
   test:
     runs-on: ubuntu-latest
     steps:
@@ -21,8 +11,8 @@ jobs:
       uses: actions/checkout@v2
     - uses: ./
       with:
-        token: ${{ secrets.TEST_TOKEN }}
-        integrationId: ${{ secrets.TEST_INTEGRATION_ID }}
-        appId: ${{ secrets.TEST_APP_ID }}
-        files: "test-assets/**"
-        dest: /httpdocs
+        PAGELY_DEPLOY_DESTGELY_DEPLOY_DEST: "/httpdocs/test"
+        PAGELY_INTEGRATION_SECRET: ${{secrets.TEST_TOKEN}}
+        PAGELY_INTEGRATION_ID: ${{secrets.TEST_INTEGRATION_ID}}
+        PAGELY_APP_ID: ${{secrets.TEST_APP_ID}}
+        PAGELY_WORKING_DIR: "${{GITHUB_WORKSPACE}}/test-assets"
