@@ -1,7 +1,7 @@
 name: "tests"
 on:
   pull_request:
-    types: [push]
+    types: [push, assigned, opened, synchronize, reopened]
 
 jobs:
   test:
@@ -9,7 +9,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    - uses: ./
+    - name: Deploy to test app
+      uses: ./
       with:
         PAGELY_DEPLOY_DESTGELY_DEPLOY_DEST: "/httpdocs/test"
         PAGELY_INTEGRATION_SECRET: ${{secrets.TEST_TOKEN}}
