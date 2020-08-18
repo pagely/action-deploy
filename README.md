@@ -1,11 +1,11 @@
 # Pagely Deploy Action
-Github action for deploying to Pagely Apps
+Github action for deploying to [Pagely](https://pagely.com/) Apps
 
 ## Inputs
 
 | Name            | Requirement | Description |
 | --------------- | ----------- | ----------  |
-| `PAGELY_INTEGRATION_SECRET` | _required_ | Authentication token, Create an CI Integration in Atomic to get this
+| `PAGELY_INTEGRATION_SECRET` | _required_ | Authentication token, Create an CI Integration in [Atomic](https://atomic.pagely.com/account/integrations) to get this
 | `PAGELY_INTEGRATION_ID`     | _required_ | Unique id for the integration found in Atomic
 | `PAGELY_APP_ID`             | _required_ | Id of the app you want to deploy to, avilable in Atomic
 | `PAGELY_DEPLOY_DEST`        | _required_ | Set the subdirectory to deploy to. examples: /httpdocs, /httpdocs/wp-content/plugins/my-plugin |
