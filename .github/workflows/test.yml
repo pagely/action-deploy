@@ -1,7 +1,7 @@
 name: "tests"
 on:
   pull_request:
-    types: [push]
+    types: [opened, synchronize]
 
 jobs:
   test:
@@ -9,10 +9,18 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    - uses: ./
+    - name: Deploy to test app
+      uses: ./
       with:
-        PAGELY_DEPLOY_DESTGELY_DEPLOY_DEST: "/httpdocs/test"
+        PAGELY_DEPLOY_DEST: "/httpdocs/test"
         PAGELY_INTEGRATION_SECRET: ${{secrets.TEST_TOKEN}}
         PAGELY_INTEGRATION_ID: ${{secrets.TEST_INTEGRATION_ID}}
         PAGELY_APP_ID: ${{secrets.TEST_APP_ID}}
-        PAGELY_WORKING_DIR: "${{GITHUB_WORKSPACE}}/test-assets"
+        PAGELY_WORKING_DIR: "${{ github.workspace }}/test-assets"
+    - name: Create a status check
+      uses: LouisBrunner/checks-action@v0.1.0
+      if: always()
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        name: Integration Test
+        conclusion: ${{ job.status }}
