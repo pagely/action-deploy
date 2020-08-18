@@ -1,7 +1,7 @@
 name: "tests"
 on:
   pull_request:
-    types: [push, assigned, opened, synchronize, reopened]
+    types: [push]
 
 jobs:
   test:
@@ -12,7 +12,7 @@ jobs:
     - name: Deploy to test app
       uses: ./
       with:
-        PAGELY_DEPLOY_DESTGELY_DEPLOY_DEST: "/httpdocs/test"
+        PAGELY_DEPLOY_DEST: "/httpdocs/test"
         PAGELY_INTEGRATION_SECRET: ${{secrets.TEST_TOKEN}}
         PAGELY_INTEGRATION_ID: ${{secrets.TEST_INTEGRATION_ID}}
         PAGELY_APP_ID: ${{secrets.TEST_APP_ID}}
@@ -23,4 +23,4 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         name: Integration Test
-        conclusion: ${{job}}
+        conclusion: ${{ job.status }}
