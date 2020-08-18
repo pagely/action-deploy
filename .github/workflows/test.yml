@@ -1,7 +1,7 @@
 name: "tests"
 on:
   pull_request:
-    types: [push]
+    types: [opened, synchronize]
 
 jobs:
   test:
